@@ -1,13 +1,16 @@
 import {
   Button as RNEButton,
   ButtonProps as RNEButtonProps,
+  Colors,
 } from "@rneui/themed";
+
+type Color = keyof Colors;
 
 interface ButtonVariant {
   [key: string]: {
     [key in keyof Omit<RNEButtonProps, "color">]: RNEButtonProps[key];
   } & {
-    color?: RNEButtonProps["color"];
+    color?: Color;
   };
 }
 
