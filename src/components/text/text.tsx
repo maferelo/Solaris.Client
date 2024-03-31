@@ -1,4 +1,4 @@
-import { Text as RNEText, TextProps as RNETextProps } from "@rneui/themed";
+import { Text as RNEText } from "@rneui/themed";
 
 const variants = {
   clear: {},
@@ -6,7 +6,7 @@ const variants = {
   solid: {},
 };
 
-export interface TextFieldProps extends RNETextProps {
+export interface TextFieldProps {
   children: React.ReactNode;
   variant?: keyof typeof variants;
 }

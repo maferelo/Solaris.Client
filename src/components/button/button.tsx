@@ -5,7 +5,9 @@ import {
 
 interface ButtonVariant {
   [key: string]: {
-    [key in keyof RNEButtonProps]: RNEButtonProps[key];
+    [key in keyof Omit<RNEButtonProps, "color">]: RNEButtonProps[key];
+  } & {
+    color?: RNEButtonProps["color"];
   };
 }
 
@@ -38,20 +40,20 @@ const sizes = {
 
 const hierarchies = {
   primary: {
-    color: "white",
+    color: "primaryA",
   },
   secondary: {
-    color: "secondary",
+    color: "primaryB",
   },
   tertiary: {
-    color: "white",
+    color: "primaryB",
     type: "clear",
   },
 } satisfies ButtonVariant;
 
 const states = {
   active: {
-    color: "grey",
+    disabled: false,
   },
   disabled: {
     disabled: true,
