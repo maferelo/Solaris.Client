@@ -105,16 +105,13 @@ export const colors = {
 } as const;
 
 export type Color = (typeof colors)[keyof typeof colors];
-declare module "@rneui/themed" {
-  export interface Colors {
-    accent: Color;
-    negative: Color;
-    positive: Color;
-    primaryA: Color;
-    primaryB: Color;
-    warn: Color;
-  }
-}
+export type Colors =
+  | "accent"
+  | "negative"
+  | "positive"
+  | "primaryA"
+  | "primaryB"
+  | "warn";
 
 export const theme = createTheme({
   lightColors: {
