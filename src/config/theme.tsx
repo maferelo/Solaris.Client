@@ -1,6 +1,8 @@
 import { createTheme } from "@rneui/themed";
 
-export const colors = {
+import { addAlpha } from "@/utils/color";
+
+const primitives = {
   black: "#000",
   gray900: "#1A202C",
   gray800: "#2D3748",
@@ -102,24 +104,127 @@ export const colors = {
   magenta300: "#E9D8FD",
   magenta200: "#F3E8FF",
   magenta100: "#FCF5FF",
-} as const;
+};
 
-export type Color = (typeof colors)[keyof typeof colors];
 export type Colors =
-  | "accent"
-  | "negative"
-  | "positive"
   | "primaryA"
   | "primaryB"
-  | "warn";
+  | "accent"
+  | "negative"
+  | "warning"
+  | "positive"
+  | "backgroundPrimary"
+  | "backgroundSecondary"
+  | "backgroundTertiary"
+  | "backgroundInversePrimary"
+  | "backgroundInverseSecondary"
+  | "contentPrimary"
+  | "contentSecondary"
+  | "contentTertiary"
+  | "contentInversePrimary"
+  | "contentInverseSecondary"
+  | "contentInverseTertiary"
+  | "borderOpaque"
+  | "borderTransparent"
+  | "borderSelected"
+  | "borderInverseSelected"
+  | "backgroundStateDisabled"
+  | "backgroundOverlayArt"
+  | "backgroundOverlayDark"
+  | "backgroundOverlayElevation"
+  | "backgroundAccent"
+  | "backgroundNegative"
+  | "backgroundWarning"
+  | "backgroundPositive"
+  | "backgroundLightAccent"
+  | "backgroundLightNegative"
+  | "backgroundLightWarning"
+  | "backgroundLightPositive"
+  | "backgroundAlwaysDark"
+  | "backgroundAlwaysLight"
+  | "contentStateDisabled"
+  | "contentOnColor"
+  | "contentOnColorInverse"
+  | "contentAccent"
+  | "contentNegative"
+  | "contentWarning"
+  | "contentPositive"
+  | "borderStateDisabled"
+  | "borderAccent"
+  | "borderNegative"
+  | "borderWarning"
+  | "borderPositive"
+  | "borderAccentLight";
+
+export const colors: Record<Colors, Color> = {
+  primaryA: primitives.black,
+  primaryB: primitives.white,
+  accent: primitives.blue500,
+  negative: primitives.red500,
+  warning: primitives.orange500,
+  positive: primitives.green500,
+  get backgroundPrimary() {
+    return this.primaryB;
+  },
+  backgroundSecondary: primitives.gray100,
+  backgroundTertiary: primitives.gray200,
+  get backgroundInversePrimary() {
+    return this.primaryA;
+  },
+  backgroundInverseSecondary: primitives.gray800,
+  contentPrimary: primitives.gray900,
+  contentSecondary: primitives.gray700,
+  contentTertiary: primitives.gray600,
+  contentInversePrimary: primitives.white,
+  contentInverseSecondary: primitives.gray200,
+  contentInverseTertiary: primitives.gray300,
+  borderOpaque: primitives.gray300,
+  get borderTransparent() {
+    return addAlpha(this.primaryA, 0.16);
+  },
+  get borderSelected() {
+    return this.primaryA;
+  },
+  get borderInverseSelected() {
+    return this.primaryB;
+  },
+  backgroundStateDisabled: primitives.gray200,
+  backgroundOverlayArt: addAlpha(primitives.black, 0.24),
+  backgroundOverlayDark: addAlpha(primitives.black, 0.64),
+  backgroundOverlayElevation: addAlpha(primitives.black, 0.16),
+  backgroundAccent: primitives.blue100,
+  backgroundNegative: primitives.red100,
+  backgroundWarning: primitives.orange100,
+  backgroundPositive: primitives.green100,
+  backgroundLightAccent: primitives.blue200,
+  backgroundLightNegative: primitives.red200,
+  backgroundLightWarning: primitives.orange200,
+  backgroundLightPositive: primitives.green200,
+  backgroundAlwaysDark: primitives.gray900,
+  backgroundAlwaysLight: primitives.white,
+  contentStateDisabled: primitives.gray500,
+  contentOnColor: primitives.white,
+  contentOnColorInverse: primitives.black,
+  contentAccent: primitives.blue500,
+  contentNegative: primitives.red500,
+  contentWarning: primitives.orange500,
+  contentPositive: primitives.green500,
+  borderStateDisabled: primitives.gray300,
+  borderAccent: primitives.blue500,
+  borderNegative: primitives.red500,
+  borderWarning: primitives.orange500,
+  borderPositive: primitives.green500,
+  borderAccentLight: primitives.blue200,
+};
+
+export type Color = (typeof primitives)[keyof typeof primitives];
 
 export const theme = createTheme({
   lightColors: {
-    accent: colors.blue500,
-    negative: colors.red500,
-    positive: colors.green500,
-    primaryA: colors.blue500,
-    primaryB: colors.blue700,
+    ...colors,
+  },
+  darkColors: {
+    ...colors,
   },
   mode: "light",
 });
