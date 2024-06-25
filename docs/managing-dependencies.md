@@ -1,5 +1,7 @@
 # Managing Dependencies
 
+[Go back](../README.md)
+
 ## Installing
 
 ```sh
@@ -16,10 +18,4 @@ npm uninstall @react-navigation/native-stack
 npx expo install @react-navigation/native-stack
 
 npm run build
-```
-
-## Updating npm
-
-```sh
-nvm install --latest-npm
 ```
