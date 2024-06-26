@@ -7,7 +7,8 @@
     "build": "eas build --profile development-simulator --platform ios --local",
     "start": "expo start --go",
     "docs": "STORYBOOK_ENABLED='true' npm run start",
-    "test": "detox test --configuration ios.sim.debug --reuse --watchAll",
+    "test": "jest --testPathIgnorePatterns=/e2e/",
+    "test:e2e": "detox test --configuration ios.sim.debug --reuse --watchAll",
     "test:ci": "detox test --configuration ios.sim.debug --headless",
     "tsc:check": "tsc",
     "lint": "eslint .",
@@ -73,6 +74,5 @@
     "transformIgnorePatterns": [
       "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
     ]
-  },
-  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+  }
 }

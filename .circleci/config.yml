@@ -56,7 +56,7 @@ jobs:
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  test:
+  build:
     jobs:
       - build-and-test:
           filters:
@@ -71,6 +71,10 @@ workflows:
     jobs:
       - node/run:
           npm-run: format:check
+  test:
+    jobs:
+      - node/run:
+          npm-run: test
   type-check:
     jobs:
       - node/run:
