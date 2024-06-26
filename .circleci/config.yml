@@ -58,7 +58,11 @@ jobs:
 workflows:
   test:
     jobs:
-      - build-and-test
+      - build-and-test:
+          filters:
+            branches:
+              only:
+                - main
   lint:
     jobs:
       - node/run:
