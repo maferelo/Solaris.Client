@@ -1,13 +1,13 @@
 import {
-  Button as RNEButton,
-  ButtonProps as RNEButtonProps,
+  Button as BaseButton,
+  ButtonProps as BaseButtonProps,
 } from "@rneui/themed";
 
-import { Colors } from "@/config/theme";
+import { colors, Colors } from "@/config/theme";
 
 interface ButtonVariant {
   [key: string]: {
-    [key in keyof Omit<RNEButtonProps, "color">]: RNEButtonProps[key];
+    [key in keyof Omit<BaseButtonProps, "color">]: BaseButtonProps[key];
   } & {
     color?: Colors;
   };
@@ -18,7 +18,7 @@ const shapes = {
     radius: 28,
   },
   rect: {
-    radius: 28,
+    radius: 8,
   },
   square: {
     radius: 0,
@@ -31,25 +31,35 @@ const shapes = {
 const sizes = {
   s: {
     size: "sm",
+    buttonStyle: {
+      height: 36,
+    },
   },
   m: {
     size: "md",
+    buttonStyle: {
+      height: 48,
+    },
   },
   l: {
     size: "lg",
+    buttonStyle: {
+      height: 56,
+    },
   },
 } satisfies ButtonVariant;
 
 const hierarchies = {
   primary: {
-    color: "primaryA",
+    color: "backgroundInversePrimary",
   },
   secondary: {
-    color: "primaryB",
+    color: "backgroundTertiary",
+    titleStyle: { color: colors.contentPrimary },
   },
   tertiary: {
-    color: "primaryB",
     type: "clear",
+    titleStyle: { color: colors.contentPrimary },
   },
 } satisfies ButtonVariant;
 
@@ -83,7 +93,7 @@ export const Button = ({
   ...props
 }: Readonly<ButtonProps>) => {
   return (
-    <RNEButton
+    <BaseButton
       title={label}
       {...props}
       {...shapes[shape]}
