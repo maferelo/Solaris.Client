@@ -42,7 +42,7 @@ jobs:
           name: "Test"
           command: |
             npm run start &
-            npm run test:ci -- \
+            npm run test:e2e:ci -- \
             --loglevel verbose --take-screenshots all --record-logs all
       - store_artifacts:
           path: artifacts/
@@ -78,4 +78,4 @@ workflows:
   type-check:
     jobs:
       - node/run:
-          npm-run: tsc:check
+          npm-run: type:check
