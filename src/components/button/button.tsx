@@ -13,6 +13,15 @@ interface ButtonVariant {
   };
 }
 
+const behaviours = {
+  fixedWidth: {},
+  intrinsictWidth: {
+    containerStyle: {
+      width: "100%",
+    },
+  },
+} satisfies ButtonVariant;
+
 const shapes = {
   pill: {
     radius: 28,
@@ -76,30 +85,37 @@ const states = {
 } satisfies ButtonVariant;
 
 export interface ButtonProps {
+  behaviour?: keyof typeof behaviours;
   hierarchy?: keyof typeof hierarchies;
   label?: string;
   onPress?: () => void;
   shape?: keyof typeof shapes;
   size?: keyof typeof sizes;
   state?: keyof typeof states;
+  width?: number;
 }
 
 export const Button = ({
+  behaviour = "intrinsictWidth",
   shape = "rect",
   size = "m",
   label,
   hierarchy = "primary",
   state = "active",
+  width,
   ...props
 }: Readonly<ButtonProps>) => {
   return (
     <BaseButton
+      raised
       title={label}
       {...props}
+      {...behaviours[behaviour]}
       {...shapes[shape]}
       {...sizes[size]}
-      {...hierarchies[hierarchy]}
       {...states[state]}
+      {...hierarchies[hierarchy]}
+      {...(width && { containerStyle: { width } })}
     />
   );
 };

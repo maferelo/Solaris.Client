@@ -1,8 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 import { Button } from "@/components/button";
-import { InputField } from "@/components/form/input-field";
 
 export type RootStackParamList = {
   Details: undefined;
@@ -14,22 +13,38 @@ export function HomeScreen({
 }: NativeStackScreenProps<RootStackParamList, "Home">) {
   return (
     <View style={styles.container} testID="home">
-      <InputField placeholder="Type here..." />
-      <Button
-        onPress={() => {
-          navigation.navigate("Details");
-        }}
-        label="Go to Details"
-      />
+      <View style={styles.topContainer}>
+        <Text>Omibus</Text>
+        <Text>Muevete tranquilo</Text>
+      </View>
+      <View style={styles.bottomContainer}>
+        <Button
+          onPress={() => {
+            navigation.navigate("Details");
+          }}
+          label="Iniciar"
+          size="l"
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
     backgroundColor: "#fff",
+    flexDirection: "column",
     flex: 1,
+    paddingHorizontal: 16,
+  },
+  topContainer: {
+    alignItems: "center",
+    flex: 8,
+    justifyContent: "space-evenly",
+  },
+  bottomContainer: {
+    alignItems: "center",
+    flex: 2,
     justifyContent: "center",
   },
 });

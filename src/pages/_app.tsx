@@ -50,7 +50,12 @@ function ProvidedApp() {
           }
         }}
       >
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
           <Stack.Screen component={HomeScreen} name="Home" />
           <Stack.Screen component={DetailsScreen} name="Details" />
         </Stack.Navigator>
