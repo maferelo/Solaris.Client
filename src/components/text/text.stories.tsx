@@ -2,14 +2,15 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Text } from "./text";
 
-const TextWithValue = () => <Text>Text</Text>;
+const meta = {
+  args: {
+    children: "Text",
+  },
+  component: Text,
+} satisfies Meta<typeof Text>;
 
-const MyInputFieldMeta: Meta<typeof Text> = {
-  component: TextWithValue,
-};
+export default meta;
 
-export default MyInputFieldMeta;
+type Story = StoryObj<typeof meta>;
 
-export const Solid: StoryObj<typeof Text> = {
-  args: { variant: "solid" },
-};
+export const Default: Story = {};

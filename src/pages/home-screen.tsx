@@ -1,7 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import { Button } from "@/components/button";
+import { Button, Text } from "@/components";
+import { colors } from "@/config/theme";
 
 export type RootStackParamList = {
   Details: undefined;
@@ -14,8 +15,12 @@ export function HomeScreen({
   return (
     <View style={styles.container} testID="home">
       <View style={styles.topContainer}>
-        <Text>Omibus</Text>
-        <Text>Muevete tranquilo</Text>
+        <Text variant="display" size="l">
+          Omibus
+        </Text>
+        <Text variant="display" size="m">
+          Muevete tranquilo
+        </Text>
       </View>
       <View style={styles.bottomContainer}>
         <Button
@@ -32,7 +37,7 @@ export function HomeScreen({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.backgroundPositive,
     flexDirection: "column",
     flex: 1,
     paddingHorizontal: 16,
