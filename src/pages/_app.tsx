@@ -4,9 +4,9 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Sentry from "@sentry/react-native";
-import Constants from "expo-constants";
 import { ReactNode } from "react";
 
+import { IS_RUNNING_IN_EXPO_GO } from "@/config/constants";
 import { DetailsScreen } from "@/pages/details";
 import { HomeScreen } from "@/pages/home-screen";
 import { AppProvider } from "@/providers/app";
@@ -20,10 +20,9 @@ type RootStackParamList = {
   Home: undefined;
 };
 
-const isRunningInExpoGo = Constants.appOwnership === "expo";
 let routingInstrumentation: Sentry.ReactNavigationInstrumentation;
 
-if (!isRunningInExpoGo) {
+if (!IS_RUNNING_IN_EXPO_GO) {
   routingInstrumentation = new Sentry.ReactNavigationInstrumentation();
 
   Sentry.init({
@@ -45,7 +44,7 @@ function ProvidedApp() {
       <NavigationContainer
         ref={navigation}
         onReady={() => {
-          if (!isRunningInExpoGo) {
+          if (!IS_RUNNING_IN_EXPO_GO) {
             routingInstrumentation.registerNavigationContainer(navigation);
           }
         }}
@@ -64,4 +63,6 @@ function ProvidedApp() {
   );
 }
 
-export const App = !isRunningInExpoGo ? Sentry.wrap(ProvidedApp) : ProvidedApp;
+export const App = !IS_RUNNING_IN_EXPO_GO
+  ? Sentry.wrap(ProvidedApp)
+  : ProvidedApp;

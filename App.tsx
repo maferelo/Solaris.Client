@@ -1,7 +1,4 @@
-import Constants from "expo-constants";
-
+import { IS_STORYBOOK_ENABLED } from "@/config/constants";
 import { App } from "@/pages/_app";
 
-export default Constants.expoConfig?.extra?.storybookEnabled === "true"
-  ? require("./.storybook").default
-  : App;
+export default IS_STORYBOOK_ENABLED ? require("./.storybook").default : App;
