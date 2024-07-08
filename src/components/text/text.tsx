@@ -107,6 +107,6 @@ export const Text = ({
   children,
   size = "m",
   variant = "paragraph",
-}: TextProps) => {
+}: Readonly<TextProps>) => {
   return <BaseText style={textStyles[variant][size]}>{children}</BaseText>;
 };

@@ -4,16 +4,11 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Sentry from "@sentry/react-native";
-import { ReactNode } from "react";
 
 import { IS_RUNNING_IN_EXPO_GO } from "@/config/constants";
 import { DetailsScreen } from "@/pages/details";
 import { HomeScreen } from "@/pages/home-screen";
 import { AppProvider } from "@/providers/app";
-
-export type AppProps = {
-  children: ReactNode;
-};
 
 type RootStackParamList = {
   Details: undefined;
