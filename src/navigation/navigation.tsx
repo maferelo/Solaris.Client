@@ -8,7 +8,7 @@ import * as Sentry from "@sentry/react-native";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import { IS_RUNNING_IN_EXPO_GO } from "@/config/constants";
+import { IS_DEVELOPMENT } from "@/config/constants";
 import { HomeScreen } from "@/screens/homeScreen/homeScreen";
 import { LoadingScreen } from "@/screens/loadingScreen/loadingScreen";
 import { SignInScreen } from "@/screens/signInScreen/signInScreen";
@@ -18,7 +18,7 @@ import { RootStackParamList } from "@/types/screens";
 
 let routingInstrumentation: Sentry.ReactNavigationInstrumentation;
 
-if (!IS_RUNNING_IN_EXPO_GO) {
+if (!IS_DEVELOPMENT) {
   routingInstrumentation = new Sentry.ReactNavigationInstrumentation();
 
   Sentry.init({
@@ -58,7 +58,7 @@ export function NavigationContainer() {
     <BaseNavigationContainer
       ref={navigationRef}
       onReady={() => {
-        if (!IS_RUNNING_IN_EXPO_GO) {
+        if (!IS_DEVELOPMENT) {
           routingInstrumentation.registerNavigationContainer(navigationRef);
         }
       }}

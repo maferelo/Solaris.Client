@@ -1,9 +1,6 @@
 import * as Sentry from "@sentry/react-native";
 
-import {
-  IS_STORYBOOK_ENABLED,
-  IS_RUNNING_IN_EXPO_GO,
-} from "@/config/constants";
+import { IS_STORYBOOK_ENABLED, IS_DEVELOPMENT } from "@/config/constants";
 import { NavigationContainer } from "@/navigation/navigation";
 import { ErrorBoundary } from "@/providers/errorBoundary";
 import { QueryClient } from "@/providers/queryClient";
@@ -27,8 +24,26 @@ function App() {
   );
 }
 
+async function enableMocking() {
+  if (!IS_DEVELOPMENT) {
+    return;
+  }
+
+  const { server } = await import("@/testing/mocks/server");
+  server.listen({
+    onUnhandledRequest: (req) => {
+      if (!req.url.includes("symbolicate")) {
+        console.warn(`onUnhandledRequest: ${req.url}`);
+      }
+    },
+  });
+
+  await import("@/lib/msw.polyfills");
+}
+enableMocking();
+
 export default IS_STORYBOOK_ENABLED
   ? require("./.storybook").default
-  : IS_RUNNING_IN_EXPO_GO
+  : IS_DEVELOPMENT
     ? App
     : Sentry.wrap(App);
