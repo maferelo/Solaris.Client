@@ -6,6 +6,7 @@ import {
 } from "@/config/constants";
 import { NavigationContainer } from "@/navigation/navigation";
 import { ErrorBoundary } from "@/providers/errorBoundary";
+import { QueryClient } from "@/providers/queryClient";
 import { RootSiblingParent } from "@/providers/rootSiblingParent";
 import { Store } from "@/providers/store";
 import { Theme } from "@/providers/theme";
@@ -14,11 +15,13 @@ function App() {
   return (
     <ErrorBoundary>
       <Store>
-        <Theme>
-          <RootSiblingParent>
-            <NavigationContainer />
-          </RootSiblingParent>
-        </Theme>
+        <QueryClient>
+          <Theme>
+            <RootSiblingParent>
+              <NavigationContainer />
+            </RootSiblingParent>
+          </Theme>
+        </QueryClient>
       </Store>
     </ErrorBoundary>
   );

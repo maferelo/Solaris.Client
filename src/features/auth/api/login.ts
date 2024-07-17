@@ -1,13 +1,29 @@
-export const login = () => {
-  return {
-    loggedIn: true,
-    user: {},
-  };
+import { useMutation } from "@tanstack/react-query";
+
+import { apiClient } from "@/lib/apiClient";
+import { queryClient } from "@/lib/reactQuery";
+
+export const logIn = (data: any): Promise<any> => {
+  return apiClient.post(
+    "/auth/login",
+    JSON.stringify({
+      username: "emylys",
+      password: "emilyspass",
+    }),
+  );
 };
 
-export const useSignIn = () => {
-  const submit = () => {
-    return login();
-  };
-  return { submit };
+type UseLoginOptions = {
+  onSuccess?: () => void;
+};
+
+export const useLogin = ({ onSuccess }: UseLoginOptions = {}) => {
+  const { mutate: submit, isPending } = useMutation({
+    mutationFn: logIn,
+    onSuccess: ({ user }) => {
+      queryClient.setQueryData(["auth-user"], user);
+      onSuccess?.();
+    },
+  });
+  return { submit, isPending };
 };
