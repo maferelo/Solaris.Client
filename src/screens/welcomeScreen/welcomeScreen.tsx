@@ -1,17 +1,14 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, View } from "react-native";
 
-import { Button, Text } from "@/components";
+import { Button } from "@/components/button/button";
+import { Text } from "@/components/text/text";
 import { colors } from "@/config/theme";
+import { RootStackParamList } from "@/types/screens";
 
-export type RootStackParamList = {
-  Details: undefined;
-  Home: undefined;
-};
-
-export function HomeScreen({
+export function WelcomeScreen({
   navigation,
-}: NativeStackScreenProps<RootStackParamList, "Home">) {
+}: NativeStackScreenProps<RootStackParamList, "Welcome">) {
   return (
     <View style={styles.container} testID="home">
       <View style={styles.topContainer}>
@@ -25,7 +22,7 @@ export function HomeScreen({
       <View style={styles.bottomContainer}>
         <Button
           onPress={() => {
-            navigation.navigate("Details");
+            navigation.navigate("SignIn");
           }}
           label="Iniciar"
           size="l"

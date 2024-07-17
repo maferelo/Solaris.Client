@@ -3,7 +3,7 @@ import {
   ButtonProps as BaseButtonProps,
 } from "@rneui/themed";
 
-import { textStyles } from "@/components/text";
+import { textStyles } from "@/components/text/text";
 import { colors, Colors } from "@/config/theme";
 
 interface ButtonVariant {
@@ -104,9 +104,11 @@ export const Button = ({
   hierarchy = "primary",
   state = "active",
   width,
+  onPress = () => {},
 }: Readonly<ButtonProps>) => {
   return (
     <BaseButton
+      onPress={onPress}
       raised
       title={label}
       titleStyle={textStyles.label[size]}

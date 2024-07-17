@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { InputField } from "./input-field";
+import { InputField } from "./form";
 
 const MyInputFieldMeta: Meta<typeof InputField> = {
   component: InputField,

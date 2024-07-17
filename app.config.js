@@ -5,5 +5,6 @@ module.exports = ({ config }) => {
       ...config.extra,
       storybookEnabled: process.env.STORYBOOK_ENABLED || "false",
     },
+    plugins: ["expo-secure-store"],
   };
 };
