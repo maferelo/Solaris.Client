@@ -3,7 +3,6 @@ import {
   InputProps as BaseInputProps,
 } from "@rneui/themed";
 import { AsYouType, isValidPhoneNumber } from "libphonenumber-js";
-import { Ref } from "react";
 import { Control, Controller, RegisterOptions } from "react-hook-form";
 
 import { DEFAULT_PHONE_NUMBER_COUNTRY_CODE } from "@/config/constants";
@@ -27,6 +26,7 @@ export interface InputProps extends BaseInputProps {
 
 export const Input = ({
   control,
+  disabled,
   error,
   name,
   placeholder,
@@ -48,6 +48,7 @@ export const Input = ({
         return (
           <BaseInput
             {...variants[variant]}
+            disabled={disabled}
             errorMessage={error}
             keyboardType={keyboardType}
             onBlur={onBlur}

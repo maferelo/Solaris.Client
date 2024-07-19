@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { View, StyleSheet } from "react-native";
 
@@ -15,6 +15,7 @@ export type SendCodeData = {
 };
 
 export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
+  const [disabled, setDisabled] = useState(false);
   const { submit, isPending } = useSendCode({ onSuccess });
   const {
     control,
@@ -24,7 +25,14 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
   } = useForm<SendCodeData>({ mode: "onChange" });
 
   useEffect(() => {
-    if (isValid) handleSubmit((data) => submit(data))();
+    if (isValid) {
+      handleSubmit((data) => submit(data))();
+      setDisabled(true);
+      const timeout = setTimeout(() => {
+        setDisabled(false);
+      }, 4000);
+      return () => clearTimeout(timeout);
+    }
   }, [isValid]);
 
   useEffect(() => {
@@ -35,6 +43,7 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
     <View style={styles.container}>
       <Input
         control={control}
+        disabled={disabled}
         placeholder="Celular"
         name="phone"
         keyboardType="phone-pad"
