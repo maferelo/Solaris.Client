@@ -10,5 +10,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     alignItems: "center",
     justifyContent: "space-evenly",
+    borderWidth: 1,
   },
 });

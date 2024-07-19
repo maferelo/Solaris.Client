@@ -1,6 +1,6 @@
 import { StrictRequest } from "msw";
 
-import { db } from "../db";
+import { db } from "./db";
 
 const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9";
 

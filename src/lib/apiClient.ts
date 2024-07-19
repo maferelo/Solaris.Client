@@ -11,15 +11,16 @@ export const apiClient = Axios.create({
   },
 });
 
-apiClient.interceptors.request.use(
+apiClient.interceptors.response.use(
   (response) => {
     return response.data;
   },
   (error) => {
-    Toast.show("Error de conexión", {
+    Toast.show("Ocurrio un error", {
       duration: Toast.durations.LONG,
       position: Toast.positions.TOP,
     });
-    return Promise.reject(new Error(error));
+
+    return Promise.reject(error);
   },
 );

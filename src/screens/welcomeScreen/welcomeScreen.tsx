@@ -23,7 +23,7 @@ export function WelcomeScreen({
       <View style={styles.bottomContainer}>
         <Button
           onPress={() => {
-            navigation.navigate("SignIn");
+            navigation.navigate("SendCode");
           }}
           label="Iniciar"
           size="l"

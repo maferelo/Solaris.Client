@@ -7,6 +7,7 @@ import { QueryClient } from "@/providers/queryClient";
 import { RootSiblingParent } from "@/providers/rootSiblingParent";
 import { Store } from "@/providers/store";
 import { Theme } from "@/providers/theme";
+import { seedDb } from "@/testing/mocks/seedDb";
 
 function App() {
   return (
@@ -39,6 +40,8 @@ async function enableMocking() {
   });
 
   await import("@/lib/msw.polyfills");
+
+  seedDb();
 }
 enableMocking();
 

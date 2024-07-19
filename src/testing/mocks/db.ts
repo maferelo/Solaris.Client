@@ -1,10 +1,8 @@
 import { factory, primaryKey } from "@mswjs/data";
 
-import { uid } from "@/utils/uid";
-
 const models = {
   user: {
-    id: primaryKey(uid),
+    id: primaryKey(Number),
     phone: String,
     code: String,
   },

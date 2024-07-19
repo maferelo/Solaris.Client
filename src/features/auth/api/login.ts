@@ -3,12 +3,17 @@ import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "@/lib/apiClient";
 import { queryClient } from "@/lib/reactQuery";
 
-export const logIn = (data: any): Promise<any> => {
+interface LogInData {
+  code: string;
+  phone: string;
+}
+
+export const logIn = (data: LogInData): Promise<any> => {
   return apiClient.post(
     "/auth/login",
     JSON.stringify({
-      username: "emylys",
-      password: "emilyspass",
+      phone: data.phone,
+      code: data.code,
     }),
   );
 };

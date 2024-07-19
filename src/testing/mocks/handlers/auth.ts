@@ -26,4 +26,8 @@ const loginHandler = http.post<PathParams, LoginRequestBody, LoginResponseBody>(
   },
 );
 
-export const authHandlers = [loginHandler];
+const sendCodeHandler = http.post(`${API_URL}/auth/send-code`, async () => {
+  return new HttpResponse(null, { status: 200 });
+});
+
+export const authHandlers = [loginHandler, sendCodeHandler];

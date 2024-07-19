@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { IS_DEVELOPMENT } from "@/config/constants";
 import { HomeScreen } from "@/screens/homeScreen/homeScreen";
 import { LoadingScreen } from "@/screens/loadingScreen/loadingScreen";
-import { SignInScreen } from "@/screens/signInScreen/signInScreen";
+import { SendCodeScreen } from "@/screens/sendCodeScreen/sendCodeScreen";
 import { WelcomeScreen } from "@/screens/welcomeScreen/welcomeScreen";
 import { RootState } from "@/store/store";
 import { RootStackParamList } from "@/types/screens";
@@ -74,7 +74,7 @@ export function NavigationContainer() {
         ) : (
           <>
             <Stack.Screen component={WelcomeScreen} name="Welcome" />
-            <Stack.Screen component={SignInScreen} name="SignIn" />
+            <Stack.Screen component={SendCodeScreen} name="SendCode" />
           </>
         )}
       </Stack.Navigator>
