@@ -2,7 +2,11 @@ import {
   Input as BaseInput,
   InputProps as BaseInputProps,
 } from "@rneui/themed";
+import { AsYouType, isValidPhoneNumber } from "libphonenumber-js";
+import { Ref } from "react";
 import { Control, Controller, RegisterOptions } from "react-hook-form";
+
+import { DEFAULT_PHONE_NUMBER_COUNTRY_CODE } from "@/config/constants";
 
 const variants = {
   clear: {},
@@ -15,6 +19,7 @@ export interface InputProps extends BaseInputProps {
   error?: string;
   keyboardType?: BaseInputProps["keyboardType"];
   name: string;
+  onChange?: () => void;
   placeholder: string;
   rules?: RegisterOptions;
   variant?: keyof typeof variants;
@@ -33,19 +38,32 @@ export const Input = ({
     <Controller
       control={control}
       name={name}
-      render={({ field: { onChange, onBlur, value, ref } }) => (
-        <BaseInput
-          {...variants[variant]}
-          errorMessage={error}
-          keyboardType={keyboardType}
-          onBlur={onBlur}
-          onChangeText={onChange}
-          placeholder={placeholder}
-          value={value}
-          ref={ref}
-        />
-      )}
-      rules={rules}
+      render={({ field: { onChange, onBlur, value, ref } }) => {
+        const handleOnChange = (value: string) => {
+          const formattedValue = new AsYouType(
+            DEFAULT_PHONE_NUMBER_COUNTRY_CODE,
+          ).input(value);
+          onChange(formattedValue);
+        };
+        return (
+          <BaseInput
+            {...variants[variant]}
+            errorMessage={error}
+            keyboardType={keyboardType}
+            onBlur={onBlur}
+            onChangeText={handleOnChange}
+            placeholder={placeholder}
+            value={value}
+            ref={ref}
+          />
+        );
+      }}
+      rules={{
+        ...rules,
+        validate: (value) =>
+          isValidPhoneNumber(value, DEFAULT_PHONE_NUMBER_COUNTRY_CODE) ||
+          "Número de teléfono inválido",
+      }}
     />
   );
 };
