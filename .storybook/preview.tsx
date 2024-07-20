@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider } from "@rneui/themed";
+import { StyleSheet } from "react-native";
 
 import type { Preview } from "@storybook/react";
 import { View } from "react-native";
@@ -14,13 +15,10 @@ const preview: Preview = {
       },
     },
   },
-
   decorators: [
     (Story) => (
       <ThemeProvider theme={theme}>
-        <View
-          style={{ alignItems: "center", justifyContent: "center", flex: 1 }}
-        >
+        <View style={styles.container}>
           <Story />
         </View>
       </ThemeProvider>
@@ -29,3 +27,12 @@ const preview: Preview = {
 };
 
 export default preview;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+});

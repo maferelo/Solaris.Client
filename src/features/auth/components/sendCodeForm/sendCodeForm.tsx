@@ -44,6 +44,7 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
       <Input
         control={control}
         disabled={disabled}
+        label="Celular"
         placeholder="Celular"
         name="phone"
         keyboardType="phone-pad"

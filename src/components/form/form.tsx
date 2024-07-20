@@ -13,13 +13,15 @@ const variants = {
   solid: {},
 };
 
-export interface InputProps extends BaseInputProps {
+export interface InputProps {
   control: Control<any, any>;
+  disabled?: boolean;
   error?: string;
   keyboardType?: BaseInputProps["keyboardType"];
+  label: string;
   name: string;
   onChange?: () => void;
-  placeholder: string;
+  placeholder?: string;
   rules?: RegisterOptions;
   variant?: keyof typeof variants;
 }
@@ -30,6 +32,7 @@ export const Input = ({
   error,
   name,
   placeholder,
+  label,
   variant = "solid",
   keyboardType,
   rules,
@@ -51,11 +54,12 @@ export const Input = ({
             disabled={disabled}
             errorMessage={error}
             keyboardType={keyboardType}
+            label={label}
             onBlur={onBlur}
             onChangeText={handleOnChange}
             placeholder={placeholder}
-            value={value}
             ref={ref}
+            value={value}
           />
         );
       }}
