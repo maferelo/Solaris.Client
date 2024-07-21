@@ -11,6 +11,8 @@ const InputWithController = (props: Omit<InputProps, "name" | "control">) => {
 const meta = {
   args: {
     label: "Input",
+    disabled: false,
+    keyboardType: "phone-pad",
   },
   component: InputWithController,
 } satisfies Meta<typeof Input>;

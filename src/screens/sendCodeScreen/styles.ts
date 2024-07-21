@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     flex: 1,
     paddingHorizontal: 16,
-    alignItems: "center",
     justifyContent: "space-evenly",
     borderWidth: 1,
   },
