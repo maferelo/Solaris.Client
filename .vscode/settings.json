@@ -21,5 +21,9 @@
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/node_modules/*/**": true
+  },
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#00FFFF",
+    "titleBar.activeForeground": "#000"
   }
 }
