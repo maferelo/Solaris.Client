@@ -5,9 +5,6 @@ module.exports = {
       $0: "jest",
       config: "e2e/jest.config.js",
     },
-    jest: {
-      setupTimeout: 120000,
-    },
   },
   artifacts: {
     plugins: {
