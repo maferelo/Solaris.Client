@@ -72,6 +72,7 @@ export interface ButtonProps {
   shape?: keyof typeof shapes;
   size?: keyof typeof sizes;
   state?: keyof typeof states;
+  testID?: string;
 }
 
 export const Button = ({

@@ -20,6 +20,7 @@ export function HomeScreen({
           navigation.navigate("Details");
         }}
         label="Go to Details"
+        testID="details"
       />
     </View>
   );
