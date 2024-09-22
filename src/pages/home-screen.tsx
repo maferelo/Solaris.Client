@@ -2,7 +2,6 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, View } from "react-native";
 
 import { Button } from "@/components/button";
-import { InputField } from "@/components/form/input-field";
 
 export type RootStackParamList = {
   Details: undefined;
