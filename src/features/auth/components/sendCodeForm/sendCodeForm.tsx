@@ -32,10 +32,8 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
     handleSubmit: phoneHandleSubmit,
     setFocus: phoneSetFocus,
     formState: { isValid: phoneIsValid },
-    getFieldState,
+    getValues,
   } = useForm<SendCodeData>({ mode: "onChange" });
-
-  const { invalid } = getFieldState("phone");
 
   const {
     control: codeControl,
@@ -83,6 +81,17 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
       return () => clearInterval(interval);
     }
   }, [resendDisabled]);
+
+  useEffect(() => {
+    if (codeIsValid && phoneIsValid) {
+      codeHandleSubmit((data) => {
+        console.log({
+          ...data,
+          phone: getValues("phone"),
+        });
+      })();
+    }
+  }, [codeIsValid]);
 
   return (
     <View style={styles.container}>
