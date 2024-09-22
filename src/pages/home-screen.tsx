@@ -14,7 +14,6 @@ export function HomeScreen({
 }: NativeStackScreenProps<RootStackParamList, "Home">) {
   return (
     <View style={styles.container} testID="home">
-      <InputField placeholder="Type here..." />
       <Button
         onPress={() => {
           navigation.navigate("Details");
