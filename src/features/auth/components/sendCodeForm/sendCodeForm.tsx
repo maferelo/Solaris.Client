@@ -110,7 +110,7 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
         control={codeControl}
         disabled={codeDisabled}
         variant="code"
-        label="Codigo"
+        label="Código"
         name="code"
         rules={{
           required: "Código es requerido",

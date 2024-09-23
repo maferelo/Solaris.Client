@@ -40,7 +40,7 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install cocoapods fastlane detox-cli
+brew install cocoapods fastlane
 ```
 
 ### Installation
@@ -80,12 +80,23 @@ npm run start
 npm run build
 ```
 
-### Run e2e Tests
+### Run Unit Tests
 
 ```sh
 npm run start
 npm run test
 ```
+
+### Run e2e Tests
+
+push a commit to the branch to trigger the build and download the artifact to the root of the project
+
+```sh
+npm run start
+npm run test:e2e
+```
+
+Note: Might need to install the app on the simulator first.
 
 ### Run the Docs
 
