@@ -93,6 +93,7 @@ export interface ButtonProps {
   shape?: keyof typeof shapes;
   size?: keyof typeof sizes;
   state?: keyof typeof states;
+  testID?: string;
   width?: number;
 }
 
@@ -103,6 +104,7 @@ export const Button = ({
   label,
   hierarchy = "primary",
   state = "active",
+  testID,
   width,
   onPress = () => {},
 }: Readonly<ButtonProps>) => {
@@ -110,6 +112,7 @@ export const Button = ({
     <BaseButton
       onPress={onPress}
       raised
+      testID={testID}
       title={label}
       titleStyle={textStyles.label[size]}
       {...behaviours[behaviour]}

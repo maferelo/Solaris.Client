@@ -104,6 +104,7 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
         rules={{
           required: "Celular es requerido",
         }}
+        testID="phone-input"
       />
       <Input
         control={codeControl}
@@ -114,6 +115,7 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
         rules={{
           required: "Código es requerido",
         }}
+        testID="code-input"
       />
       {!resendDisabled && <Text>Reenviando código en {resendTimer}</Text>}
     </View>

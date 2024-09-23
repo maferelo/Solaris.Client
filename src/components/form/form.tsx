@@ -42,6 +42,7 @@ export interface InputProps {
   label: string;
   name: string;
   rules?: RegisterOptions;
+  testID?: string;
   variant?: keyof typeof variants;
 }
 
@@ -52,6 +53,7 @@ export const Input = ({
   name,
   label,
   variant = "text",
+  testID,
   rules,
 }: InputProps) => {
   return (
@@ -81,6 +83,7 @@ export const Input = ({
             onBlur={onBlur}
             onChangeText={handleOnChange}
             ref={ref}
+            testID={testID}
             value={value}
           />
         );

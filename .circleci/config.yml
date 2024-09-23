@@ -31,7 +31,7 @@ jobs:
           command: "brew tap wix/brew && brew install applesimutils"
       - run:
           name: "Install node modules"
-          command: "npm ci && npm install -g eas-cli@7.6.0"
+          command: "npm ci && npm install -g eas-cli@12.4.1"
       - run:
           name: "Build"
           command: "npm run build"

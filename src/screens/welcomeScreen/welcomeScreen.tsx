@@ -27,6 +27,7 @@ export function WelcomeScreen({
           }}
           label="Iniciar"
           size="l"
+          testID="start-button"
         />
       </View>
     </View>
