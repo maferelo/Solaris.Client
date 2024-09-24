@@ -5,6 +5,16 @@ module.exports = ({ config }) => {
       ...config.extra,
       storybookEnabled: process.env.STORYBOOK_ENABLED || "false",
     },
-    plugins: ["expo-secure-store"],
+    plugins: [
+      "expo-secure-store",
+      [
+        "expo-build-properties",
+        {
+          ios: {
+            useFrameworks: "static",
+          },
+        },
+      ],
+    ],
   };
 };
