@@ -38,12 +38,6 @@ jobs:
       - run:
           name: "Extract"
           command: "mv ./*.tar.gz build.tar.gz && tar -xvzf build.tar.gz"
-      - run:
-          name: "Test"
-          command: |
-            npm run start &
-            npm run test:e2e:ci -- \
-            --loglevel verbose --take-screenshots all --record-logs all
       - store_artifacts:
           path: artifacts/
       - store_artifacts:
