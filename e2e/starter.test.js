@@ -7,6 +7,8 @@ describe("Example", () => {
         `http://localhost:8081`,
       )}&disableOnboarding=1`,
     });
+
+    await device.shake();
   });
 
   it("should have home screen", async () => {
@@ -19,7 +21,6 @@ describe("Example", () => {
   });
 
   it("should allow to send code", async () => {
-    await waitFor(element(by.id("phone-input")).atIndex(0)).toBeVisible();
     await element(by.id("phone-input")).atIndex(0).typeText("3017839876");
     await element(by.id("code-input")).atIndex(0).typeText("1234");
   });

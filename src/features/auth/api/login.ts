@@ -1,11 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
+import * as SecureStore from "expo-secure-store";
 
 import { apiClient } from "@/lib/apiClient";
-import { queryClient } from "@/lib/reactQuery";
 
 interface LogInData {
   code: string;
   phone: string;
+}
+
+async function setToken(token: string) {
+  await SecureStore.setItemAsync("token", token);
 }
 
 export const logIn = (data: LogInData): Promise<any> => {
@@ -27,7 +31,7 @@ export const useLogin = ({ onSuccess }: UseLoginOptions = {}) => {
   const { mutate: submit, isPending } = useMutation({
     mutationFn: logIn,
     onSuccess: (res) => {
-      console.log("token", res);
+      setToken(res.access);
       onSuccess?.();
     },
   });

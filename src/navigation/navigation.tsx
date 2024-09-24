@@ -5,6 +5,7 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Sentry from "@sentry/react-native";
+import * as SecureStore from "expo-secure-store";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -41,13 +42,10 @@ export function NavigationContainer() {
   useReactNavigationDevTools(navigationRef);
 
   useEffect(() => {
-    const timerId = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-
-    return () => {
-      clearTimeout(timerId);
-    };
+    (async function () {
+      console.log(await SecureStore.getItemAsync("token"));
+    })();
+    setIsLoading(false);
   }, []);
 
   if (isLoading) {
