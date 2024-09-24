@@ -7,7 +7,6 @@ import { QueryClient } from "@/providers/queryClient";
 import { RootSiblingParent } from "@/providers/rootSiblingParent";
 import { Store } from "@/providers/store";
 import { Theme } from "@/providers/theme";
-import { seedDb } from "@/testing/mocks/seedDb";
 
 function App() {
   return (
@@ -24,26 +23,6 @@ function App() {
     </ErrorBoundary>
   );
 }
-
-async function enableMocking() {
-  if (!IS_DEVELOPMENT) {
-    return;
-  }
-
-  const { server } = await import("@/testing/mocks/server");
-  server.listen({
-    onUnhandledRequest: (req) => {
-      if (!req.url.includes("symbolicate")) {
-        console.warn(`onUnhandledRequest: ${req.url}`);
-      }
-    },
-  });
-
-  await import("@/lib/msw.polyfills");
-
-  seedDb();
-}
-enableMocking();
 
 export default IS_STORYBOOK_ENABLED
   ? require("./.storybook").default

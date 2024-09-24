@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { apiClient } from "@/lib/apiClient";
 
 export const sendCode = (data: any): Promise<any> => {
-  return apiClient.post("/auth/send-code", JSON.stringify(data));
+  return apiClient.post("/api/auth/send-code/", JSON.stringify(data));
 };
 
 type UseSendCodeOptions = {

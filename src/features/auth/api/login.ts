@@ -10,10 +10,11 @@ interface LogInData {
 
 export const logIn = (data: LogInData): Promise<any> => {
   return apiClient.post(
-    "/auth/login",
+    "/api/auth/log-in/",
     JSON.stringify({
       phone: data.phone,
       code: data.code,
+      group: "rider",
     }),
   );
 };
@@ -25,8 +26,8 @@ type UseLoginOptions = {
 export const useLogin = ({ onSuccess }: UseLoginOptions = {}) => {
   const { mutate: submit, isPending } = useMutation({
     mutationFn: logIn,
-    onSuccess: ({ user }) => {
-      queryClient.setQueryData(["auth-user"], user);
+    onSuccess: (res) => {
+      console.log("token", res);
       onSuccess?.();
     },
   });

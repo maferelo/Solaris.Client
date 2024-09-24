@@ -23,13 +23,13 @@ const variants: InputVariant = {
   phone: {
     keyboardType: "number-pad",
     maxLength: 11,
-    placeholder: "999 9999999",
+    placeholder: "123 4567890",
   },
   code: {
     autoComplete: "sms-otp",
     keyboardType: "number-pad",
     maxLength: 4,
-    placeholder: "123456",
+    placeholder: "1234",
     textContentType: "oneTimeCode",
   },
 };
