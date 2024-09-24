@@ -23,9 +23,9 @@ export const authenticate = ({
     return {
       token: AUTH_TOKEN,
     };
+  } else {
+    throw new Error("Invalid credentials");
   }
-
-  throw new Error("Invalid credentials");
 };
 
 export const requireAuth = (req: StrictRequest<any>) => {

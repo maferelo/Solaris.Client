@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { View, StyleSheet } from "react-native";
 
+import { useLogin } from "../../api/login";
 import { useSendCode } from "../../api/sendCode";
 
 import { Input } from "@/components/form/form";
@@ -27,6 +28,9 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
   const [resendDisabled, setResendDisabled] = useState(true);
   const [resendTimer, setResendTimer] = useState(RESEND_TIMER);
   const { submit, isPending } = useSendCode({ onSuccess });
+  const { submit: submitCode, isPending: isPendingSubmit } = useLogin({
+    onSuccess,
+  });
   const {
     control: phoneControl,
     handleSubmit: phoneHandleSubmit,
@@ -42,6 +46,7 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
     formState: { isValid: codeIsValid },
   } = useForm<CodeAuthData>({ mode: "onChange" });
 
+  // Disable phone input when it is valid
   useEffect(() => {
     if (phoneIsValid) {
       phoneHandleSubmit((data) => submit(data))();
@@ -57,16 +62,19 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
     }
   }, [phoneIsValid]);
 
+  // Focus code input when it is enabled
   useEffect(() => {
     if (codeDisabled === false) {
       codeSetFocus("code");
     }
   }, [codeDisabled]);
 
+  // Focus phone input on mount
   useEffect(() => {
     phoneSetFocus("phone");
   }, []);
 
+  // Resend code timer
   useEffect(() => {
     if (!resendDisabled) {
       const interval = setInterval(() => {
@@ -82,10 +90,11 @@ export const SendCodeForm = ({ onSuccess }: SendCodeFormProps) => {
     }
   }, [resendDisabled]);
 
+  // Submit when code is valid
   useEffect(() => {
     if (codeIsValid && phoneIsValid) {
       codeHandleSubmit((data) => {
-        console.log({
+        submitCode({
           ...data,
           phone: getValues("phone"),
         });

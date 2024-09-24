@@ -2,7 +2,7 @@ export const testData = {
   users: [
     {
       id: 1,
-      phone: "1234567890",
+      phone: "301 7839876",
       code: "1234",
     },
   ],

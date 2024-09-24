@@ -28,12 +28,11 @@ const variants: InputVariant = {
   code: {
     autoComplete: "sms-otp",
     keyboardType: "number-pad",
-    maxLength: 6,
+    maxLength: 4,
     placeholder: "123456",
     textContentType: "oneTimeCode",
   },
 };
-
 export interface InputProps {
   control: Control<any, any>;
   disabled?: boolean;
@@ -90,9 +89,19 @@ export const Input = ({
       }}
       rules={{
         ...rules,
-        validate: (value) =>
-          isValidPhoneNumber(value, DEFAULT_PHONE_NUMBER_COUNTRY_CODE) ||
-          "Número de teléfono inválido",
+        validate: (value) => {
+          switch (variant) {
+            case "phone":
+              return (
+                isValidPhoneNumber(value, DEFAULT_PHONE_NUMBER_COUNTRY_CODE) ||
+                "Número de teléfono inválido"
+              );
+            case "code":
+              return value.length === 4 || "Código inválido";
+            default:
+              return true;
+          }
+        },
       }}
     />
   );
