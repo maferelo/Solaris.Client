@@ -1,7 +1,7 @@
 module.exports = {
   "*.{js,ts,tsx}": [
     "npx eslint",
-    "bash -c 'npm run tsc:check'",
+    "bash -c 'npm run type:check'",
     "npm run format:check",
   ],
 };

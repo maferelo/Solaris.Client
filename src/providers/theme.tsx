@@ -1,11 +1,8 @@
 import { ThemeProvider } from "@rneui/themed";
-import { ReactNode } from "react";
 
 import { theme } from "@/config/theme";
+import { ProviderProps } from "@/types/providers";
 
-type AppProviderProps = {
-  children: ReactNode;
-};
-export const AppProvider = ({ children }: AppProviderProps) => {
+export const Theme = ({ children }: ProviderProps) => {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };

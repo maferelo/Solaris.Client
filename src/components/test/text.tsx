@@ -93,10 +93,11 @@ export const textStyles = {
     },
   },
 } satisfies Record<Variants, Record<Sizes, BaseTextProps["style"]>>;
+
 export interface TextProps {
-  children: any;
-  size?: keyof (typeof textStyles)["paragraph"];
-  variant?: keyof typeof textStyles;
+  children: React.ReactNode;
+  size?: Sizes;
+  variant?: Variants;
 }
 
 export const Text = ({

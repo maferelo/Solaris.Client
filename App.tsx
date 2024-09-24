@@ -1,11 +1,31 @@
-import Constants from "expo-constants";
+import * as Sentry from "@sentry/react-native";
 
-import { App } from "@/pages/_app";
+import { IS_STORYBOOK_ENABLED, IS_DEVELOPMENT } from "@/config/constants";
+import { NavigationContainer } from "@/navigation/navigation";
+import { ErrorBoundary } from "@/providers/errorBoundary";
+import { QueryClient } from "@/providers/queryClient";
+import { RootSiblingParent } from "@/providers/rootSiblingParent";
+import { Store } from "@/providers/store";
+import { Theme } from "@/providers/theme";
 
-let AppEntryPoint = App;
-
-if (Constants.expoConfig?.extra?.storybookEnabled === "true") {
-  AppEntryPoint = require("./.storybook").default;
+function App() {
+  return (
+    <ErrorBoundary>
+      <Store>
+        <QueryClient>
+          <Theme>
+            <RootSiblingParent>
+              <NavigationContainer />
+            </RootSiblingParent>
+          </Theme>
+        </QueryClient>
+      </Store>
+    </ErrorBoundary>
+  );
 }
 
-export default AppEntryPoint;
+export default IS_STORYBOOK_ENABLED
+  ? require("./.storybook").default
+  : IS_DEVELOPMENT
+    ? App
+    : Sentry.wrap(App);

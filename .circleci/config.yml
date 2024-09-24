@@ -14,7 +14,7 @@ jobs:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/executor-intro/ & https://circleci.com/docs/configuration-reference/#executor-job
     macos:
-      xcode: 15.2.0
+      xcode: 16.0.0
 
     # Add steps to the job
     # See: https://circleci.com/docs/jobs-steps/#steps-overview & https://circleci.com/docs/configuration-reference/#steps
@@ -31,19 +31,13 @@ jobs:
           command: "brew tap wix/brew && brew install applesimutils"
       - run:
           name: "Install node modules"
-          command: "npm ci && npm install -g eas-cli@7.6.0"
+          command: "npm ci && npm install -g eas-cli@12.4.1"
       - run:
           name: "Build"
           command: "npm run build"
       - run:
           name: "Extract"
           command: "mv ./*.tar.gz build.tar.gz && tar -xvzf build.tar.gz"
-      - run:
-          name: "Test"
-          command: |
-            npm run start &
-            npm run test:ci -- \
-            --loglevel verbose --take-screenshots all --record-logs all
       - store_artifacts:
           path: artifacts/
       - store_artifacts:
@@ -56,7 +50,7 @@ jobs:
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  test:
+  build:
     jobs:
       - build-and-test
   lint:
@@ -67,7 +61,11 @@ workflows:
     jobs:
       - node/run:
           npm-run: format:check
+  test:
+    jobs:
+      - node/run:
+          npm-run: test
   type-check:
     jobs:
       - node/run:
-          npm-run: tsc:check
+          npm-run: type:check

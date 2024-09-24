@@ -1,24 +1,34 @@
 import {
-  Button as RNEButton,
-  ButtonProps as RNEButtonProps,
+  Button as BaseButton,
+  ButtonProps as BaseButtonProps,
 } from "@rneui/themed";
 
-import { Colors } from "@/config/theme";
+import { textStyles } from "@/components/text/text";
+import { colors, Colors } from "@/config/theme";
 
 interface ButtonVariant {
   [key: string]: {
-    [key in keyof Omit<RNEButtonProps, "color">]: RNEButtonProps[key];
+    [key in keyof Omit<BaseButtonProps, "color">]: BaseButtonProps[key];
   } & {
     color?: Colors;
   };
 }
+
+const behaviours = {
+  fixedWidth: {},
+  intrinsictWidth: {
+    containerStyle: {
+      width: "100%",
+    },
+  },
+} satisfies ButtonVariant;
 
 const shapes = {
   pill: {
     radius: 28,
   },
   rect: {
-    radius: 28,
+    radius: 8,
   },
   square: {
     radius: 0,
@@ -31,25 +41,35 @@ const shapes = {
 const sizes = {
   s: {
     size: "sm",
+    buttonStyle: {
+      height: 36,
+    },
   },
   m: {
     size: "md",
+    buttonStyle: {
+      height: 48,
+    },
   },
   l: {
     size: "lg",
+    buttonStyle: {
+      height: 56,
+    },
   },
 } satisfies ButtonVariant;
 
 const hierarchies = {
   primary: {
-    color: "primaryA",
+    color: "backgroundInversePrimary",
   },
   secondary: {
-    color: "primaryB",
+    color: "backgroundTertiary",
+    titleStyle: { color: colors.contentPrimary },
   },
   tertiary: {
-    color: "primaryB",
     type: "clear",
+    titleStyle: { color: colors.contentPrimary },
   },
 } satisfies ButtonVariant;
 
@@ -66,30 +86,41 @@ const states = {
 } satisfies ButtonVariant;
 
 export interface ButtonProps {
+  behaviour?: keyof typeof behaviours;
   hierarchy?: keyof typeof hierarchies;
   label?: string;
   onPress?: () => void;
   shape?: keyof typeof shapes;
   size?: keyof typeof sizes;
   state?: keyof typeof states;
+  testID?: string;
+  width?: number;
 }
 
 export const Button = ({
+  behaviour = "intrinsictWidth",
   shape = "rect",
   size = "m",
   label,
   hierarchy = "primary",
   state = "active",
-  ...props
+  testID,
+  width,
+  onPress = () => {},
 }: Readonly<ButtonProps>) => {
   return (
-    <RNEButton
+    <BaseButton
+      onPress={onPress}
+      raised
+      testID={testID}
       title={label}
-      {...props}
+      titleStyle={textStyles.label[size]}
+      {...behaviours[behaviour]}
       {...shapes[shape]}
       {...sizes[size]}
-      {...hierarchies[hierarchy]}
       {...states[state]}
+      {...hierarchies[hierarchy]}
+      {...(width && { containerStyle: { width } })}
     />
   );
 };

@@ -27,11 +27,21 @@ This project is a React Native application designed to optimize bus routes and s
 
 ### Prerequisites
 
+- [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
 - [Expo Go app](https://expo.dev/client) (for testing on mobile devices)
 - Ventura with Xcode 15.2 with command line tools (download from the App Store)
 - [Homebrew](https://brew.sh/)
 - [fastlane](https://docs.fastlane.tools/getting-started/ios/setup/) (for iOS builds)
 - [detox](https://wix.github.io/Detox/docs/introduction/environment-setup) (for e2e testing)
+
+```sh
+xcode-select --install
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+brew install cocoapods fastlane
+```
 
 ### Installation
 
@@ -53,6 +63,7 @@ nvm install
 
 ```sh
 npm install
+npm install -g npx detox-cli@<eas.json.cli.version>
 ```
 
 ## Usage
@@ -69,12 +80,23 @@ npm run start
 npm run build
 ```
 
-### Run e2e Tests
+### Run Unit Tests
 
 ```sh
 npm run start
 npm run test
 ```
+
+### Run e2e Tests
+
+push a commit to the branch to trigger the build and download the artifact to the root of the project
+
+```sh
+npm run start
+npm run test:e2e
+```
+
+Note: Might need to install the app on the simulator first.
 
 ### Run the Docs
 
@@ -87,6 +109,22 @@ npm run docs
 ### [Manage Dependencies](docs/managing-dependencies.md)
 
 ## Troubleshoot
+
+### Husky Hooks Not Running
+
+Add the following to the `$HOME/.huskyrc` file:
+
+```sh
+# This loads nvm.sh and sets the correct PATH before running hook
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+```
+
+### Build failing
+
+```sh
+npm run build -- --clear-cache
+```
 
 ### Check for Issues
 
